@@ -2,6 +2,18 @@
 #import "unistd.h"
 #import <objc/runtime.h>
 
+//#define NO_LOG
+
+#ifdef NO_LOG
+void NoLog(NSString* str, ...)
+{
+}
+
+#define FSLog NoLog
+#else
+#define FSLog NSLog
+#endif
+
 @interface FMDatabase ()
 
 - (FMResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray*)arrayArgs orDictionary:(NSDictionary *)dictionaryArgs orVAList:(va_list)args;
